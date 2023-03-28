@@ -1,4 +1,7 @@
+import MenuScene from "./menu.js"
 import Stars from "./stars.js"
+import Background from "./background.js"
+
 
 
 export default class GameScene {
@@ -13,6 +16,7 @@ export default class GameScene {
         for (let i = 0; i < 100; i++){
             this.stars.push(new Stars(Math.random() * this.game.canvas.width,  Math.random() * this.game.canvas.height))
         }
+        this.background = new Background(this.game)
     }
 
     update(dt) {
@@ -27,12 +31,20 @@ export default class GameScene {
                 star.update(dt)
             }
         )
+
+        this.background.update(dt)
+
+        if (this.game.checkKeyPress('Escape')) {
+            this.game.setScene(MenuScene);
+        }
         
     }
 
     render(dt, ctx, canvas) {
         ctx.fillStyle = '#000000'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+        this.background.render(dt, ctx, canvas)
 
         this.stars.forEach(
             (star, index) => {

@@ -16,7 +16,7 @@ export default class MenuScene {
             'Exit'
         ]
         this.stars = []
-        for (let i = 0; i < 50; i++){
+        for (let i = 0; i < 200; i++){
             this.stars.push(new Stars(Math.random() * this.game.canvas.width,  Math.random() * this.game.canvas.height))
         }
     }

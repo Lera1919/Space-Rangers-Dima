@@ -15,6 +15,7 @@ export default class Player {
         }
         this.image = document.getElementById('player')
         this.bullets = []
+        this.interval_shoot = 0
 
     }
 
@@ -40,8 +41,12 @@ export default class Player {
         }
 
         if (this.game.keys['Space']) {
-           this.bullets.push(new Bullet(this.position.x + this.width / 2, this.position.y))
-        }
+            if (this.interval_shoot <= 0) {
+            this.bullets.push(new Bullet(this.position.x + this.width / 2, this.position.y))
+            this.interval_shoot = 100
+            }
+            this.interval_shoot -= dt
+           }
 
         this.bullets.forEach((bullet, index) => {
             if (bullet.position.y + bullet.height < 0) {
